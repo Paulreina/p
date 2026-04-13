@@ -1,0 +1,615 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>记录一些Mac OS X技巧</title>
+  <link rel="icon" type="image/x-icon" href="/p/linen-theme/favicon.svg" />
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+  
+  <meta name="description" content="&lt;p&gt;用了几个月Mac OS X，发现很多东西不记录下来就会找不到，于是就有了这篇日志。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;重启Finder&lt;/p&gt;
+&lt;p&gt;有些设置更改以后需要重启Finder才能生效，最简单的方法就是按住option，再右键点击Finder，选择&amp;ldquo;重新开启&amp;rdquo;。  &lt;/p&gt;
+&lt;p&gt;此外还可在终端运行如下代码：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;killall Finder&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;更改文件关联方式&lt;/p&gt;
+&lt;p&gt;右键选择显示简介，在&amp;ldquo;打开方式&amp;rdquo;一栏中选择想要使用的程序，然后点击&amp;ldquo;全部更改&amp;hellip;&amp;rdquo;按钮。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;禁用虚拟内存&lt;/p&gt;
+&lt;p&gt;Mac OS X有个很奇葩的设定，它把内存分为了可用内存、联动内存、活跃内存和非活跃内存，详情可以看《通过活动监视器了解系统内存使用情况》。  &lt;/p&gt;
+&lt;p&gt;其中，当你退出一个软件时，它所占用的部分内存并不会释放，而是标记为非活跃，下次运行它时可以转换成活跃内存。但如果你不幸把可用内存用完了，Mac OS X并不会使用这些非活跃内存，而是直接使用虚拟内存（交换文件），这会严重影响运行效率。  &lt;/p&gt;
+&lt;p&gt;如果你的内存有4GB以上，大部分情况下都已经够用了，于是就可以禁用虚拟内存，以获得更快的速度：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;p&gt;禁用以后，磁盘上还保留着这些交换文件，它们已经没用了，也可以删掉：&lt;/p&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code class=&#34;cs&#34; style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;sudo rm /&amp;lt;span class=&#34;keyword&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;&#34;&gt;private&amp;lt;/span&gt;/&amp;lt;span class=&#34;keyword&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;&#34;&gt;var&amp;lt;/span&gt;/vm/swapfile*&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;p&gt;如果要重新启用虚拟内存的话，可以执行这条命令：&lt;/p&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code class=&#34;ruby&#34; style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;sudo&amp;lt;/span&gt; &amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;launchctl&amp;lt;/span&gt; &amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;load&amp;lt;/span&gt; -&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;w&amp;lt;/span&gt; /&amp;lt;span class=&#34;constant&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;System&amp;lt;/span&gt;/&amp;lt;span class=&#34;constant&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;Library&amp;lt;/span&gt;/&amp;lt;span class=&#34;constant&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;LaunchDaemons&amp;lt;/span&gt;/&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;com&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;apple&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;metadata&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;mds&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;plist&amp;lt;/span&gt;&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;p&gt;如果要临时释放不活跃内存，可以执行这条命令（需要安装Xcode，执行时会比较卡）：&lt;br style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34; /&gt;&lt;/p&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;purge&lt;/code&gt;" />
+  
+<meta property="og:type" content="blog">
+<meta property="og:title" content="记录一些Mac OS X技巧">
+<meta property="og:url" content="/p/2013/03/22/osx-tips/">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&lt;p&gt;用了几个月Mac OS X，发现很多东西不记录下来就会找不到，于是就有了这篇日志。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;重启Finder&lt;/p&gt;
+&lt;p&gt;有些设置更改以后需要重启Finder才能生效，最简单的方法就是按住option，再右键点击Finder，选择&amp;ldquo;重新开启&amp;rdquo;。  &lt;/p&gt;
+&lt;p&gt;此外还可在终端运行如下代码：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;killall Finder&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;更改文件关联方式&lt;/p&gt;
+&lt;p&gt;右键选择显示简介，在&amp;ldquo;打开方式&amp;rdquo;一栏中选择想要使用的程序，然后点击&amp;ldquo;全部更改&amp;hellip;&amp;rdquo;按钮。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;禁用虚拟内存&lt;/p&gt;
+&lt;p&gt;Mac OS X有个很奇葩的设定，它把内存分为了可用内存、联动内存、活跃内存和非活跃内存，详情可以看《通过活动监视器了解系统内存使用情况》。  &lt;/p&gt;
+&lt;p&gt;其中，当你退出一个软件时，它所占用的部分内存并不会释放，而是标记为非活跃，下次运行它时可以转换成活跃内存。但如果你不幸把可用内存用完了，Mac OS X并不会使用这些非活跃内存，而是直接使用虚拟内存（交换文件），这会严重影响运行效率。  &lt;/p&gt;
+&lt;p&gt;如果你的内存有4GB以上，大部分情况下都已经够用了，于是就可以禁用虚拟内存，以获得更快的速度：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;p&gt;禁用以后，磁盘上还保留着这些交换文件，它们已经没用了，也可以删掉：&lt;/p&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code class=&#34;cs&#34; style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;sudo rm /&amp;lt;span class=&#34;keyword&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;&#34;&gt;private&amp;lt;/span&gt;/&amp;lt;span class=&#34;keyword&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;&#34;&gt;var&amp;lt;/span&gt;/vm/swapfile*&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;p&gt;如果要重新启用虚拟内存的话，可以执行这条命令：&lt;/p&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code class=&#34;ruby&#34; style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;sudo&amp;lt;/span&gt; &amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;launchctl&amp;lt;/span&gt; &amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;load&amp;lt;/span&gt; -&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;w&amp;lt;/span&gt; /&amp;lt;span class=&#34;constant&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;System&amp;lt;/span&gt;/&amp;lt;span class=&#34;constant&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;Library&amp;lt;/span&gt;/&amp;lt;span class=&#34;constant&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;LaunchDaemons&amp;lt;/span&gt;/&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;com&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;apple&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;metadata&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;mds&amp;lt;/span&gt;.&amp;lt;span class=&#34;identifier&#34; style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34;&gt;plist&amp;lt;/span&gt;&lt;/code&gt;
+
+&lt;/pre&gt;
+
+&lt;p&gt;如果要临时释放不活跃内存，可以执行这条命令（需要安装Xcode，执行时会比较卡）：&lt;br style=&#34;margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;&#34; /&gt;&lt;/p&gt;
+&lt;pre style=&#34;margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; white-space: pre-wrap;&#34;&gt;&lt;code style=&#34;margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: &#39;Droid Sans Mono&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Lucida Console&#39;, &#39;Courier New&#39;, monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;&#34;&gt;purge&lt;/code&gt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://xxx.xxx/xx.jpg"> 
+  
+  <link rel="stylesheet" href="/p/linen-theme/css/linkcard.css?v=undefined" />
+  
+  <!-- stylesheets list from _config.yml -->
+  
+  <link rel="stylesheet" href="/p/linen-theme/css/linen.css?v=undefined" />
+  
+  <link rel="stylesheet" href="/p/linen-theme/css/mediaquery.css?v=undefined" />
+   
+  
+  <link rel="stylesheet" href="/p/linen-theme/css/lazyload.css?v=undefined" />
+  
+  
+  
+<meta name="generator" content="Hexo 8.1.1"><script>var $lazyload = {
+    intersectionRatio: 0.25,
+    preloadCount: 5, 
+    keepPlaceholder: false}</script></head>
+
+<body>
+  <div id="page-top"></div>
+  
+
+
+<div class="nav-header-pleaceholder"></div>
+
+<div class="nav-header is-post">
+  <div class="header-inner">
+    <a class="title" href="/p/" title="index" style="background-image: url(/linen-theme/img/paullogo.svg);aspect-ratio: 225/42"></a>
+    <div class="right">
+      <div class="navItems">
+        
+        <a class="navItem" href="/p/archives/">归档</a>
+        
+      </div>
+      <div class="buttonSet">
+        
+        
+        
+        
+          <a class="button rss" href="/p/feed.xml" target="_blank" title="rss"></a>
+        
+        
+      </div>
+    </div>
+  </div>
+</div> 
+  <div class="banner-bg"></div>
+  
+  <div id="safe-area-test" style="position: fixed; bottom: 0; height: env(safe-area-inset-bottom);"></div>
+  <div class="page-body">
+    <div class="side-content">
+      
+    </div>
+    <div class="side-content">
+      
+    </div>
+    <div id="content-outer" class="post-outer">
+      <div id="content-inner">
+        
+
+<article id="post" class="article">
+  <h1 class="post-title">记录一些Mac OS X技巧</h1>
+  <div class="post-meta">
+    
+    <time class="date" datetime="2013-03-21T16:00:00.000Z">
+      3 月 22 日，2013
+    </time>
+    
+    
+      <div class="categories">
+        
+        <a class="category-item" href="/p/categories/%E6%8A%80%E6%9C%AF%E5%89%8D%E6%B2%BF/">技术前沿</a>
+        
+      </div>
+    
+    <div class="read-time">
+
+  <span>约</span>
+
+  <span>24</span>
+
+  <span>分钟阅读</span>
+
+
+  <small>(</small>
+
+  <small>22801</small>
+
+  <small>个字</small>
+
+  <small>)</small>
+</div>
+    <div class="page-pv">阅读<span id="busuanzi_value_page_pv"></span></div>
+    
+  </div>
+  
+  <div id="page-content"><p>用了几个月Mac OS X，发现很多东西不记录下来就会找不到，于是就有了这篇日志。</p>
+<ol>
+<li><p>重启Finder</p>
+<p>有些设置更改以后需要重启Finder才能生效，最简单的方法就是按住option，再右键点击Finder，选择&ldquo;重新开启&rdquo;。  </p>
+<p>此外还可在终端运行如下代码：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">killall Finder</code>
+
+</pre>
+
+<ol>
+<li><p>更改文件关联方式</p>
+<p>右键选择显示简介，在&ldquo;打开方式&rdquo;一栏中选择想要使用的程序，然后点击&ldquo;全部更改&hellip;&rdquo;按钮。</p>
+</li>
+<li><p>禁用虚拟内存</p>
+<p>Mac OS X有个很奇葩的设定，它把内存分为了可用内存、联动内存、活跃内存和非活跃内存，详情可以看《通过活动监视器了解系统内存使用情况》。  </p>
+<p>其中，当你退出一个软件时，它所占用的部分内存并不会释放，而是标记为非活跃，下次运行它时可以转换成活跃内存。但如果你不幸把可用内存用完了，Mac OS X并不会使用这些非活跃内存，而是直接使用虚拟内存（交换文件），这会严重影响运行效率。  </p>
+<p>如果你的内存有4GB以上，大部分情况下都已经够用了，于是就可以禁用虚拟内存，以获得更快的速度：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist</code>
+
+</pre>
+
+<p>禁用以后，磁盘上还保留着这些交换文件，它们已经没用了，也可以删掉：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="cs" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">sudo rm /&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">private&lt;/span>/&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">var&lt;/span>/vm/swapfile*</code>
+
+</pre>
+
+<p>如果要重新启用虚拟内存的话，可以执行这条命令：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ruby" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">sudo&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">launchctl&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">load&lt;/span> -&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">w&lt;/span> /&lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">System&lt;/span>/&lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">Library&lt;/span>/&lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">LaunchDaemons&lt;/span>/&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">com&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">apple&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">metadata&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">mds&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">plist&lt;/span></code>
+
+</pre>
+
+<p>如果要临时释放不活跃内存，可以执行这条命令（需要安装Xcode，执行时会比较卡）：<br style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;" /></p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">purge</code><span id="more"></span>
+
+</pre>
+
+<ol>
+<li><p>编辑plist配置文件</p>
+<p>用户的配置文件都存储在~&#x2F;Library&#x2F;Preferences&#x2F;，双击即可打开编辑。  </p>
+<p>此外还可在终端运行如下代码来编辑：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ruby" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">defaults&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">write&lt;/span> 域名 键名 键值
+
+&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">defaults&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">delete&lt;/span> 域名
+
+&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">defaults&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">delete&lt;/span> 域名 键名</code>
+
+</pre>
+
+<ol>
+<li><p>显示隐藏文件</p>
+<p>在终端运行如下代码：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="cs" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">defaults write com.apple.finder AppleShowAllFiles -&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">bool&lt;/span> &lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">true&lt;/span>
+
+killall Finder</code>
+
+</pre>
+
+<p>要隐藏则运行：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="cs" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">defaults write com.apple.finder AppleShowAllFiles -&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">bool&lt;/span> &lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">false&lt;/span>
+
+killall Finder</code>
+
+</pre>
+
+<ol>
+<li><p>修改终端的提示文字 </p>
+<ul>
+<li><p>\d &ndash; 现在的系统日期</p>
+</li>
+<li><p>\t &ndash; 现在的系统时间</p>
+</li>
+<li><p>\h &ndash; 主机名</p>
+</li>
+<li><p># &ndash; 命令号（Comannd Number）</p>
+</li>
+<li><p>\u &ndash; 用户名</p>
+</li>
+<li><p>\W &ndash; 当前所在的路径</p>
+</li>
+<li><p>\w &ndash; 当前所在的完整路径</p>
+<p>环境变量PS1就是终端的提示文字格式，默认为&ldquo;\h:\W \u$&rdquo;，可以用echo来查看：</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="bash" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">echo&lt;/span> &lt;span class="variable" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #3e87e3; background-position: initial initial; background-repeat: initial initial;">$PS1&lt;/span></code>
+
+</pre>
+
+<p>PS2则是换行后的提示符，默认为&ldquo;&gt;&rdquo;。  </p>
+<p>部分可使用的格式有（完整的可以运行man bash，然后查看PROMPTING部分）：</p>
+<p>如只想显示命令号，可以输入如下命令：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ini" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="setting" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">PS1=&lt;span class="value" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">&lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">"\#: "&lt;/span>&lt;/span>&lt;/span></code>
+
+</pre>
+
+<p>改成Linux风格可运行：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ini" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="setting" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">PS1=&lt;span class="value" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">&lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">"[\u@\h \W]\$ "&lt;/span>&lt;/span>&lt;/span></code>
+
+</pre>
+
+<p>但是退出后这些环境变量就丢失了，要永久生效的话，可以在<del>&#x2F;.bash_profile、</del>&#x2F;.bash_login、~&#x2F;.profile或&#x2F;etc&#x2F;profile（需要管理员权限）里进行设置：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="bash" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">echo&lt;/span> 'PS1=&lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">"[\u@\h \W]\$ "&lt;/span>' &gt;&gt; ~/.bash_profile</code>
+
+</pre>
+
+<p>要修改主机名的话，可以打开&ldquo;系统偏好设置&rdquo;里的&ldquo;共享&rdquo;，然后编辑电脑名称。</p>
+<ol>
+<li><p>快速定位到文件夹</p>
+<p>Finder没有地址栏，不能直接输入路径来打开文件夹，不过可以右键点Finder图标，选择&ldquo;前往文件夹⋯&rdquo;。</p>
+</li>
+<li><p>在打开文件对话框中打开路径</p>
+<p>显示打开文件对话框后，按command-shift-g快捷键或者&#x2F;键就会出现&ldquo;前往文件夹&rdquo;对话框。</p>
+</li>
+<li><p>重命名文件</p>
+<p>在Finder中选中文件，然后回车，或者等1秒后再单击文件。（对隐藏文件无效）</p>
+<ol>
+<li><p>查看多个文件的总大小</p>
+<p>在Finder中选中多个文件，按住control再点右键，选择&ldquo;获得摘要信息&rdquo;。或者直接点右键，然后按control或option，选择&ldquo;获得摘要信息&rdquo;或&ldquo;显示检查器&rdquo;。</p>
+</li>
+<li><p>删除.DS_Store文件</p>
+<p>只要用Finder打开文件夹，就会自动生成这些文件，无法禁止这行为，但可以使用这行代码删除（sudo是为了删除一些没权限访问的文件）：</p>
+</li>
+</ol>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ruby" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">sudo&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">find&lt;/span> / -&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">name&lt;/span> &lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">".DS_Store"&lt;/span> -&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">delete&lt;/span></code>
+
+</pre>
+
+<ol>
+<li><p>管理Dashboard里的widgets</p>
+<p>按F4或fn-F12调出Dashboard，点左下角的+号，就可以添加和删除widgets了。<br style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;" /></p>
+</li>
+<li><p>将Dashboard里的widget放在桌面。</p>
+<p>先在终端输入如下代码：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ruby" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">defaults&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">write&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">com&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">apple&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">dashboard&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">devmode&lt;/span> &lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">YES&lt;/span>
+
+&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">killall&lt;/span> &lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">Dock&lt;/span></code>
+
+</pre>
+
+<p>然后调出Dashboard，拖动widget并按住鼠标不放，然后按F4关闭Dashboard，这时候该widget就显示在桌面上了。不过它会显示在最上面，挡住其他窗口。</p>
+<ol>
+<li><p>开启FTP共享（10.7以后已取消该功能）</p>
+<p>在&ldquo;系统偏好设置&rdquo;里找到&ldquo;共享&rdquo;，勾选&ldquo;文件共享&rdquo;，然后点击&ldquo;选项&rdquo;按钮，勾选&ldquo;使用FTP来共享文件和文件夹&rdquo;，再勾选允许访问的用户即可。  </p>
+<p>访问时使用本机的ip，端口为22，用户名和密码为该用户的Mac OS X的登录密码。</p>
+</li>
+<li><p>关闭鼠标加速度</p>
+<p>Mac OS X的鼠标加速度很诡异，缓慢移动鼠标时几乎很难移动。  </p>
+<p>下载<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://triq.net/software/mouse-acceleration-preference-pane-mac-os-x">Mouse Acceleration Preference Pane</a>这个配置文件，安装后把Mouse加速度改成负值（如-6）就能关闭加速度。</p>
+</li>
+<li><p>增强触摸板</p>
+<p>默认的触摸板设置并不好用，比如单击鼠标必须把触摸板按下去，在&ldquo;系统偏好设置&rdquo;里找到&ldquo;触摸板&rdquo;，然后就能改成&ldquo;轻拍来点按&rdquo;。其他的功能可以看演示视频。  </p>
+<p>此外，建议使用<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://blog.boastr.net/">BetterTouchTool</a>（免费下载，Mac App Store里收费）和<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://www.jitouch.com/">Jitouch</a>（收费）来增强功能。这2个软件各自有些独有的功能，所以最好都安装，只不过设置的时候比较头痛。  </p>
+<p>需要注意的是，使用这2个软件需要在&ldquo;系统偏好设置&rdquo;里找到&ldquo;万能辅助&rdquo;，然后勾选&ldquo;启用辅助设备的控制&rdquo;。</p>
+</li>
+<li><p>控制风扇转速</p>
+<p>MacBook Pro的风扇控制有些问题，最高转速有6000RPM，噪音非常大。可以下载<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://www.eidac.de/?p=134">smcFanControl</a>这款软件来手动控制风扇转速（平时建议设为3000RPM）。</p>
+</li>
+<li><p>查看温度</p>
+<p>安装<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://www.islayer.com/apps/istatpro/">iStat Pro</a>，然后调出Dashboard，就能看到CPU、硬盘等的温度，此外还能显示内存、CPU等运行状态。</p>
+</li>
+<li><p>最大化窗口</p>
+<p>按住shift键再点+号，只对部分程序有效。此外可用Jitouch等增强软件来实现。</p>
+</li>
+<li><p>调节音量</p>
+<p>按住shift，再按音量调节键，就不会发出声音。  </p>
+<p>按住shift-option，再按音量调节键，就可以以1&#x2F;4格的大小进行调节。  </p>
+<p>降低音量到无声后，再按静音键，就会调节到最低音量。</p>
+</li>
+<li><p>修改Xcode模板文件</p>
+<p>这些文件都存储在&#x2F;Developer&#x2F;Platforms&#x2F;iPhoneOS.platform&#x2F;Developer&#x2F;Library&#x2F;Xcode&#x2F;Project Templates&#x2F;Application路径下，详情可参考<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://blog.csdn.net/aogufeixue/archive/2009/04/09/4059990.aspx">创建Xcode的工程模板和代码模板</a>。  </p>
+<p>模板文件里会使用_\__FULLUSERNAME___这种变量来引用设置的值，这些值可通过修改com.apple.Xcode的PBXCustomTemplateMacroDefinitions字段来设定，例如：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ruby" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">defaults&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">write&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">com&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">apple&lt;/span>.&lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">Xcode&lt;/span> &lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">PBXCustomTemplateMacroDefinitions&lt;/span> &lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">'{"FULLUSERNAME" = "keakon"; "ORGANIZATIONNAME" = "keakon.net";}'&lt;/span></code>
+
+</pre>
+
+<p>此外还能修改日期格式，例如：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="ruby" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">defaults&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">write&lt;/span> &lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">com&lt;/span>.&lt;span class="identifier" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">apple&lt;/span>.&lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">Xcode&lt;/span> &lt;span class="constant" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">AppleICUDateFormatStrings&lt;/span> &lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">'{1="yyyy-MM-dd";}'&lt;/span></code>
+
+</pre>
+
+<ol>
+<li><p>Dock的相关操作</p>
+<p>将鼠标指针放在分隔线上面，直到箭头出现，然后上下拖动可以改变Dock大小。  </p>
+<p>按住control键并点按分隔线，可以打开Dock快捷键菜单。  </p>
+<p>按下control-fn-F3可以移动到Dock，然后可以使用左右方向键在图标之间移动，按下return可以打开一个图标。</p>
+</li>
+<li><p>按键图标（如果看不到部分图标，可能是字体缺失，Mac OS X下无问题）</p>
+<p>⇧ Shift  </p>
+<p>↩ Return  </p>
+<p>⇞ PageUp  </p>
+<p>⇟ PageDown  </p>
+<p>⌃ Control  </p>
+<p>⌤ Enter  </p>
+<p>⌘ Command  </p>
+<p>⌥ Option(Alt)  </p>
+<p>⌫ Delete  </p>
+<p>⎋ Esc  </p>
+<p>⏏ Eject</p>
+</li>
+<li><p>快捷键</p>
+<p>可参考<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://support.apple.com/kb/HT1343?viewlocale=zh_CN">官方文档</a>，这里只列出一些常用的。  </p>
+<p>fn-F1<del>F12：F1</del>F12的原始功能  </p>
+<p>fn-delete：向后删除  </p>
+<p>fn-上&#x2F;下：PageUp&#x2F;PageDown  </p>
+<p>fn-左&#x2F;右：滚动到文档顶部&#x2F;底部  </p>
+<p>control-左&#x2F;右：定位到行首&#x2F;行尾（Xcode中为定位到上一个&#x2F;下一个单词）  </p>
+<p>option-左&#x2F;右：定位到上一个&#x2F;下一个词（以标点符号和空格分隔）  </p>
+<p>command-左&#x2F;右：定位到行首&#x2F;行尾  </p>
+<p>command-上&#x2F;下：定位到文档的开头&#x2F;结尾  </p>
+<p>command-上：Finder中打开上级文件夹  </p>
+<p>control-a&#x2F;e：定位到行首&#x2F;行尾  </p>
+<p>command-delete：删除文件、删除光标位置到行首的内容  </p>
+<p>option-delete：删除光标位置前的一个单词  </p>
+<p>fn-option-delete：删除光标位置后的一个单词  </p>
+<p>shift-command-3：将屏幕捕捉到文件（保存到桌面）  </p>
+<p>shift-control-command-3：将屏幕捕捉到剪贴板  </p>
+<p>shift-command-4：将所选内容捕捉到文件（保存到桌面）（若按空格，可以选择捕捉的窗口）  </p>
+<p>shift-control-command-4：将所选内容捕捉到剪贴板（若按空格，可以选择捕捉的窗口）  </p>
+<p>command-m：最小化窗口  </p>
+<p>option-command-m：最小化当前程序的所有窗口  </p>
+<p>command-h：隐藏窗口  </p>
+<p>command-w：关闭窗口  </p>
+<p>command-q：退出程序  </p>
+<p>option-command-esc：强制退出程序  </p>
+<p>option-command-w：关闭当前程序的所有窗口  </p>
+<p>option-command-d：隐藏&#x2F;显示Dock  </p>
+<p>command-.：弹出自动完成菜单</p>
+</li>
+<li><p>在Mission Control里查看原始大小的窗口</p>
+<p>Mission Control会显示所有窗口的缩略图，要查看原始大小的窗口，可以将鼠标悬停在该窗口上，等它高亮后按空格即可，再按空格或点击鼠标可恢复。</p>
+</li>
+<li><p>进入深度睡眠状态</p>
+<p>合上Mac笔记本电脑的屏幕时，Mac OS X会自动进入睡眠状态。此时内存等设备仍然在供电，如果打开屏幕，瞬间就能唤醒。如果长时间不用的话，就会进入深度睡眠状态。系统会将内存中的内容写入磁盘，并停止内存的供电；再次唤醒时，需要从磁盘读取到内存才能继续使用。后者虽然会让唤醒过程变慢，但更加省电。  </p>
+<p>如果想直接进入深度睡眠状态的话，可以在终端运行如下代码，然后合上屏幕：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="go" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">sudo pmset -a hibernatemode&lt;span class="number" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #3387cc; background-position: initial initial; background-repeat: initial initial;"> 25&lt;/span></code>
+
+</pre>
+
+<p>关于hibernatemode的值，可以查看<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://developer.apple.com/library/mac/#documentation%2FDarwin%2FReference%2FManPages%2Fman1%2Fpmset.1.html">pmset文档</a>。  </p>
+<p>想恢复默认的睡眠策略的话，可以重新设置hibernatemode：台式机的默认值是0，笔记本电脑是3。  </p>
+<p>如果是使用SSD的，为节省硬盘空间，可以设为0，并删除休眠文件：</p>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="cs" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">sudo rm /&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">var&lt;/span>/vm/sleepimage</code>
+
+</pre>
+
+<ol>
+<li><p>启用SSD的TRIM支持：</p>
+<p>SSD提供了TRIM功能，可以提升写入速度并延长使用寿命。但如果不是苹果自带的SSD，默认是没有启用该功能的，只能手动启用：</p>
+</li>
+</ol>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; white-space: pre-wrap;"><code class="perl" style="margin: 8px 0px; padding: 0.5em; border: 0px; outline: 0px; vertical-align: baseline; background-color: #000000; font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', 'Lucida Console', 'Courier New', monospace; word-wrap: break-word; display: block; font-size: 1em; line-height: 1.3em; color: #f8f8f8; box-shadow: rgba(0, 0, 0, 0.701961) 3px 3px 3px;">&lt;span class="comment" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #aeaeae; font-style: italic; background-position: initial initial; background-repeat: initial initial;"># 备份文件&lt;/span>
+
+sudo cp &lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">/System/&lt;/span>Librar&lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">y/Extensions/IOAHCIFamily.kext/&lt;/span>Content&lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">s/PlugIns/IOAHCIBlockStorage.kext/&lt;/span>Content&lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">s/MacOS/IOAHCIBlockStorage /&lt;/span>IOAHCIBlockStorage.original
+
+&lt;span class="comment" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #aeaeae; font-style: italic; background-position: initial initial; background-repeat: initial initial;"># 修改文件&lt;/span>
+
+sudo perl -pi &lt;span class="operator" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; background-position: initial initial; background-repeat: initial initial;">-e&lt;/span> &lt;span class="string" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #65b042; background-position: initial initial; background-repeat: initial initial;">'s|(\x52\x6F\x74\x61\x74\x69\x6F\x6E\x61\x6C\x00).{9}(\x00\x51)|$1\x00\x00\x00\x00\x00\x00\x00\x00\x00$2|sg'&lt;/span> &lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">/System/&lt;/span>Librar&lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">y/Extensions/IOAHCIFamily.kext/&lt;/span>Content&lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">s/PlugIns/IOAHCIBlockStorage.kext/&lt;/span>Contents&lt;span class="regexp" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e9c062; background-position: initial initial; background-repeat: initial initial;">/MacOS/&lt;/span>IOAHCIBlockStorage
+
+&lt;span class="comment" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #aeaeae; font-style: italic; background-position: initial initial; background-repeat: initial initial;"># 更新缓存&lt;/span>
+
+sudo kextcache -&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">system&lt;/span>-prelinked-kernel
+
+sudo kextcache -&lt;span class="keyword" style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #e28964; background-position: initial initial; background-repeat: initial initial;">system&lt;/span>-caches</code>
+
+</pre>
+
+<p>然后重启即可。  </p>
+<p>若嫌麻烦的话，也可以用<a style="margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background-color: transparent; color: #03a7eb; text-decoration: none; background-position: initial initial; background-repeat: initial initial;" target="_blank" rel="noopener" href="http://www.groths.org/package/trim-enabler/">Trim Enabler</a>。</ol></p>
+<div id="gitalk-initiator"></div></div>
+  <div id="page-content-end"></div>
+  <div class="tags">
+    
+    <a class="tag-item" href="/p/tags/OSX-%E8%8B%B9%E6%9E%9C/">OSX, 苹果</a>
+    
+  </div>
+</article>
+
+
+<div class="post-nav-wrap">
+  <div class="post-nav">
+    
+    <a class="post-nav-item prev" target="_self" href="/p/2013/03/24/mailbox-waitting/"><span class="item-link">亲，你还在等Mailbox吗？</span><span class="nav-indicator-text">上一篇</span></a>
+    
+    
+    <a class="post-nav-item next" target="_self" href="/p/2013/03/21/google-keepsave-whats-on-your-mind/"><span class="item-link">Google的笔记服务Google Keep正式发布</span><span class="nav-indicator-text">下一篇</a>
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+  <div class="footerInner">
+    <div class="footerItems">
+      <!-- <a class="footerItem" href="">About This Blog</a> -->
+      <span class="footerItem"><abbr title="本网站及其所有内容都遵循创意共享署名-非商业性使用 4.0 国际许可协议。" style="cursor: help;">©</abbr>&nbsp;2026 John Doe</span>
+      <span class="footerItem">Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span>
+      
+      <span class="footerItem">火星ICP备22222222</span>
+      
+    </div>
+  </div>
+</footer>
+  <div id="mask"></div>
+  <a id="back-to-top" href="#page-top" title="back to top"></a>
+  <noscript id="noscript-styles"><style>.hdr-info-wrap {
+  display: none;
+}
+#back-to-top {
+  transform: translateY(0);
+  pointer-events: all;
+  opacity: 1;
+}
+.lazyload-wrap {
+  display: none;
+}
+.post-cover-img-wrap .cover-img {
+  opacity: 1 !important;
+}
+#gitalk-container {
+  display: none;
+}
+.hdr-switch {
+  display: none;
+}
+#toc-toggle {
+  display: none;
+}
+.button.rss {
+  margin-right: 0 !important;
+}
+.copy-btn {
+  display: none;
+}
+#page-donates {
+  display: none;
+}
+#post-age-warning {
+  display: none;
+}
+#toc .toc-item-wrap:not(.active) {
+  opacity: unset;
+  transition: unset;
+}
+#toc:hover .toc-item-wrap:not(.active) {
+  opacity: unset;
+}
+#toc .toc-item-wrap.active .toc-item-link {
+  font-weight: normal;
+  color: #333;
+}
+#toc .toc-item-wrap.active .toc-item-link::before {
+  display: none;
+}
+#toc .toc-item-wrap.active .toc-item-link:not(.active) {
+  opacity: unset;
+}
+#toc .toc-item-wrap.active .toc-sub-item-link:not(.active) {
+  opacity: unset;
+}
+#post .post-meta #content-switch {
+  display: none;
+}
+#post figure.highlight.folded,
+#raw-markdown-block figure.highlight.folded {
+  max-height: unset;
+  overflow-y: auto;
+}
+#post figure.highlight.folded .fold-toggle,
+#raw-markdown-block figure.highlight.folded .fold-toggle {
+  display: none;
+}
+</style></noscript>
+  
+  <script src="/p/linen-theme/js/toc.js?v=undefined" defer></script>
+  
+  
+  <!-- scripts list from theme config.yml -->
+  
+  <script src="/p/linen-theme/js/linen.js?v=undefined"></script>
+  
+  
+  
+  <script src="/p/linen-theme/js/lazyload.js?v=undefined"></script>
+  
+  
+  
+  
+</body>
+
+</html>
