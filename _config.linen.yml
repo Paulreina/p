@@ -1,0 +1,18 @@
+info:
+  site_desc: Paul的日常.
+  avatar: /linen-theme/img/profile.png
+  siteCardBg: https://xxx.xxx/xx.jpg
+  registration: 火星ICP备22222222
+logo:
+  src: /linen-theme/img/paullogo.svg
+  width: 225
+  height: 42
+navItems:
+  - name: 归档
+    path: /archives/
+siteOriginLocaleMap:
+  zh-CN: http://localhost:4000/
+topArticles:
+  - _posts/2023-12-27-Malaysia2023.md
+  - _posts/2023-12-26-HongKong2023.md
+  - _posts/2019-01-14-TaiPei-Travel.md
