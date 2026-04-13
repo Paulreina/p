@@ -5,6 +5,7 @@ layout: post
 categories:
   - 生活
 cover: https://imgs.paulreina.com/2019-0103/taipei_008.jpg
+series: 旅游
 tags:
   - 台北,旅游
 ---

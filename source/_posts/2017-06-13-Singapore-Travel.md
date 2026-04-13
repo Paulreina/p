@@ -4,6 +4,7 @@ author: Paul
 layout: post
 categories:
   - 生活
+series: 旅游
 tags:
   - 旅游,Nikki,新加坡,马来西亚,浪中岛
 ---
