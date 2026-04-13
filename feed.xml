@@ -2,13 +2,13 @@
 <?xml-stylesheet type="text/xsl" href="/p/linen-theme/css/rss-zh.xsl"?>
 <rss version="2.0">
 <channel>
-  <title>Hexo</title>
+  <title>Paul&#39;s Blog</title>
   <link>https://paulreina.com/p</link>
   <description></description>
-  <lastBuildDate>Mon, 13 Apr 2026 06:13:26 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 13 Apr 2026 06:18:19 GMT</lastBuildDate>
   <image>
       <url>https://paulreina.com/pundefined</url>
-      <title>Hexo</title>
+      <title>Paul&#39;s Blog</title>
       <link>https://paulreina.com/p</link>
     </image>
   
