@@ -1,12 +1,13 @@
 info:
   site_desc: Paul的日常.
-  avatar: ./linen-theme/img/profile.png
+  avatar: https://imgs.paulreina.com/profile.png
   siteCardBg: https://xxx.xxx/xx.jpg
   registration: 火星ICP备22222222
 logo:
-  src: /p/linen-theme/img/paullogo.svg
+  src: https://imgs.paulreina.com/paullogo.svg
   width: 225
   height: 42
+icon: https://imgs.paulreina.com/nikki_favicon.ico
 navItems:
   - name: 归档
     path: /archives/
