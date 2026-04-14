@@ -14,7 +14,7 @@ navItems:
 siteOriginLocaleMap:
   zh-CN: http://localhost:4000/
 topArticles:
+  - _posts/2025-07-30-Japan2025.md
   - _posts/2026-04-13-Thailand2026.md
   - _posts/2023-12-27-Malaysia2023.md
   - _posts/2023-12-26-HongKong2023.md
-  - _posts/2019-01-14-TaiPei-Travel.md
